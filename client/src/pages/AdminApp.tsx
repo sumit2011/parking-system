@@ -34,7 +34,7 @@ export default function AdminApp() {
 
   return (
     <AdminLayout>
-      {({ activeTab }) => (
+      {({ activeTab }: { activeTab: "dashboard" | "bookings" | "spots" | "users" }) => (
         <>
           {activeTab === "dashboard" && <Dashboard />}
           {activeTab === "bookings" && <BookingsManagement />}

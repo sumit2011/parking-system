@@ -1,7 +1,19 @@
 import { User, InsertUser, ParkingSpot, InsertParkingSpot, Booking, InsertBooking } from "@shared/schema";
 import * as bcrypt from "bcrypt";
+import session from "express-session";
+import createMemoryStore from "memorystore";
+
+const MemoryStore = createMemoryStore(session);
+
+// Define session with userId
+declare module 'express-session' {
+  interface SessionData {
+    userId: number;
+  }
+}
 
 export interface IStorage {
+  sessionStore: ReturnType<typeof createMemoryStore>;
   // User operations
   getUser(id: number): Promise<User | undefined>;
   getUserByEmail(email: string): Promise<User | undefined>;
@@ -46,6 +58,7 @@ export interface IStorage {
 }
 
 export class MemStorage implements IStorage {
+  public sessionStore: ReturnType<typeof createMemoryStore>;
   private users: Map<number, User>;
   private parkingSpots: Map<number, ParkingSpot>;
   private bookings: Map<number, Booking>;
@@ -54,6 +67,9 @@ export class MemStorage implements IStorage {
   private bookingIdCounter: number;
 
   constructor() {
+    this.sessionStore = MemoryStore({
+      checkPeriod: 86400000 // 24 hours
+    });
     this.users = new Map();
     this.parkingSpots = new Map();
     this.bookings = new Map();
@@ -82,7 +98,7 @@ export class MemStorage implements IStorage {
     return bcrypt.compareSync(plain, hashed);
   }
 
-  private createInitialParkingSpots() {
+  private async createInitialParkingSpots() {
     // Level 1 spots
     for (let i = 1; i <= 6; i++) {
       this.createParkingSpot({
@@ -106,13 +122,13 @@ export class MemStorage implements IStorage {
     }
     
     // Set some spots as unavailable for demo purposes
-    const spotA3 = this.getParkingSpotByNumber("A3");
-    const spotB2 = this.getParkingSpotByNumber("B2");
-    const spotB6 = this.getParkingSpotByNumber("B6");
+    const spotA3 = await this.getParkingSpotByNumber("A3");
+    const spotB2 = await this.getParkingSpotByNumber("B2");
+    const spotB6 = await this.getParkingSpotByNumber("B6");
     
-    if (spotA3) this.updateParkingSpot(spotA3.id, { isAvailable: false });
-    if (spotB2) this.updateParkingSpot(spotB2.id, { isAvailable: false });
-    if (spotB6) this.updateParkingSpot(spotB6.id, { isAvailable: false });
+    if (spotA3) await this.updateParkingSpot(spotA3.id, { isAvailable: false });
+    if (spotB2) await this.updateParkingSpot(spotB2.id, { isAvailable: false });
+    if (spotB6) await this.updateParkingSpot(spotB6.id, { isAvailable: false });
   }
 
   // User operations

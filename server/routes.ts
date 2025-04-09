@@ -5,9 +5,23 @@ import { authRouter } from "./auth";
 import { authMiddleware, adminMiddleware } from "./middleware";
 import { z } from "zod";
 import { insertBookingSchema, insertParkingSpotSchema } from "@shared/schema";
+import session from "express-session";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   const httpServer = createServer(app);
+
+  // Set up session middleware
+  app.use(session({
+    secret: 'parksmart-secret-key',
+    resave: false,
+    saveUninitialized: false,
+    store: storage.sessionStore,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production'
+    }
+  }));
 
   // Authentication routes
   app.use("/api/auth", authRouter);

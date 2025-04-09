@@ -24,10 +24,10 @@ export function Header() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <Link href="/">
-                <a className="flex items-center">
+                <div className="flex items-center cursor-pointer">
                   <PlusCircle className="h-8 w-8 text-primary" />
                   <span className="ml-2 text-xl font-semibold text-gray-800">ParkSmart</span>
-                </a>
+                </div>
               </Link>
             </div>
             <div className="flex items-center">

@@ -6,7 +6,7 @@ import { PlusCircle, LayoutDashboard, Calendar, MapPin, Users, LogOut } from "lu
 type Tab = "dashboard" | "bookings" | "spots" | "users";
 
 interface AdminLayoutProps {
-  children: ReactNode;
+  children: ({ activeTab }: { activeTab: Tab }) => ReactNode;
   defaultTab?: Tab;
 }
 
