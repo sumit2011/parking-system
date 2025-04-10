@@ -122,13 +122,14 @@ export function AdminLayout({ children, defaultTab = "dashboard" }: AdminLayoutP
 
       <div className="flex-1 overflow-auto">
         {/* Header */}
-        <header className="bg-white shadow">
+        <header className="bg-background border-b shadow">
           <div className="px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center">
-            <h1 className="text-2xl font-semibold text-gray-800">{tabTitle[activeTab]}</h1>
+            <h1 className="text-2xl font-semibold text-foreground">{tabTitle[activeTab]}</h1>
             <div className="flex items-center">
-              <span className="mr-2 text-gray-600">Admin User</span>
-              <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-                <Users className="h-5 w-5 text-gray-600" />
+              <ThemeToggle />
+              <span className="mx-2 text-muted-foreground">Admin User</span>
+              <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
+                <Users className="h-5 w-5 text-muted-foreground" />
               </div>
             </div>
           </div>

@@ -3,7 +3,7 @@ import { UserTabs } from "@/components/user/UserTabs";
 
 export default function UserApp() {
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-background min-h-screen">
       <Header />
       <UserTabs />
     </div>
