@@ -7,6 +7,7 @@ import UserApp from "@/pages/UserApp";
 import AdminApp from "@/pages/AdminApp";
 import Login from "@/pages/Login";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 function AppRoutes() {
   return (
@@ -21,12 +22,14 @@ function AppRoutes() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <AppRoutes />
-        <Toaster />
-      </AuthProvider>
-    </QueryClientProvider>
+    <ThemeProvider defaultTheme="system" storageKey="quick-park-theme">
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <AppRoutes />
+          <Toaster />
+        </AuthProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 
