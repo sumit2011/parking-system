@@ -35,7 +35,7 @@ export function AdminLayout({ children, defaultTab = "dashboard" }: AdminLayoutP
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
-      <div className="w-64 bg-gray-800 text-white">
+      <div className="w-64 bg-slate-900 text-white">
         <div className="p-4">
           <div className="flex items-center">
             <PlusCircle className="h-8 w-8 text-blue-400" />
@@ -50,7 +50,7 @@ export function AdminLayout({ children, defaultTab = "dashboard" }: AdminLayoutP
           </div>
           <a 
             href="#" 
-            className={`block px-4 py-2 ${activeTab === "dashboard" ? "text-white bg-gray-700" : "text-gray-300 hover:bg-gray-700 hover:text-white"}`}
+            className={`block px-4 py-2 ${activeTab === "dashboard" ? "text-white bg-slate-800" : "text-gray-300 hover:bg-slate-800 hover:text-white"}`}
             onClick={(e) => { 
               e.preventDefault();
               handleTabChange("dashboard");
@@ -63,7 +63,7 @@ export function AdminLayout({ children, defaultTab = "dashboard" }: AdminLayoutP
           </a>
           <a 
             href="#" 
-            className={`block px-4 py-2 ${activeTab === "bookings" ? "text-white bg-gray-700" : "text-gray-300 hover:bg-gray-700 hover:text-white"}`}
+            className={`block px-4 py-2 ${activeTab === "bookings" ? "text-white bg-slate-800" : "text-gray-300 hover:bg-slate-800 hover:text-white"}`}
             onClick={(e) => { 
               e.preventDefault();
               handleTabChange("bookings");
@@ -76,7 +76,7 @@ export function AdminLayout({ children, defaultTab = "dashboard" }: AdminLayoutP
           </a>
           <a 
             href="#" 
-            className={`block px-4 py-2 ${activeTab === "spots" ? "text-white bg-gray-700" : "text-gray-300 hover:bg-gray-700 hover:text-white"}`}
+            className={`block px-4 py-2 ${activeTab === "spots" ? "text-white bg-slate-800" : "text-gray-300 hover:bg-slate-800 hover:text-white"}`}
             onClick={(e) => { 
               e.preventDefault();
               handleTabChange("spots");
@@ -89,7 +89,7 @@ export function AdminLayout({ children, defaultTab = "dashboard" }: AdminLayoutP
           </a>
           <a 
             href="#" 
-            className={`block px-4 py-2 ${activeTab === "users" ? "text-white bg-gray-700" : "text-gray-300 hover:bg-gray-700 hover:text-white"}`}
+            className={`block px-4 py-2 ${activeTab === "users" ? "text-white bg-slate-800" : "text-gray-300 hover:bg-slate-800 hover:text-white"}`}
             onClick={(e) => { 
               e.preventDefault();
               handleTabChange("users");
@@ -106,7 +106,7 @@ export function AdminLayout({ children, defaultTab = "dashboard" }: AdminLayoutP
           </div>
           <a 
             href="#" 
-            className="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white"
+            className="block px-4 py-2 text-gray-300 hover:bg-slate-800 hover:text-white"
             onClick={(e) => { 
               e.preventDefault();
               handleLogout();
