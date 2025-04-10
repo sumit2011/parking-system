@@ -38,7 +38,7 @@ export function AdminLayout({ children, defaultTab = "dashboard" }: AdminLayoutP
         <div className="p-4">
           <div className="flex items-center">
             <PlusCircle className="h-8 w-8 text-blue-400" />
-            <span className="ml-2 text-xl font-semibold">ParkSmart</span>
+            <span className="ml-2 text-xl font-semibold">Quick Park</span>
           </div>
           <div className="mt-2 text-gray-400 text-sm">Admin Panel</div>
         </div>

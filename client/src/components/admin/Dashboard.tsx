@@ -86,11 +86,11 @@ export function Dashboard() {
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex items-center">
             <div className="p-3 rounded-full bg-yellow-100 text-yellow-500">
-              <DollarSign className="h-6 w-6" />
+              <IndianRupee className="h-6 w-6" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-500">Revenue Today</p>
-              <p className="text-2xl font-semibold text-gray-900">${data.revenueToday}</p>
+              <p className="text-2xl font-semibold text-gray-900">₹{data.revenueToday}</p>
             </div>
           </div>
         </div>

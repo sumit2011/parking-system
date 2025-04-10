@@ -194,7 +194,7 @@ export function ParkingSpotsManagement() {
                         {spot.isAvailable ? "Available" : "Occupied"}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${spot.pricePerHour.toFixed(2)}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹{spot.pricePerHour.toFixed(2)}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <button 
                         className="text-blue-600 hover:text-blue-800 mr-3"
@@ -325,7 +325,7 @@ export function ParkingSpotsManagement() {
                   name="pricePerHour"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Price Per Hour ($)</FormLabel>
+                      <FormLabel>Price Per Hour (₹)</FormLabel>
                       <FormControl>
                         <Input 
                           type="number" 

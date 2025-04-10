@@ -26,7 +26,7 @@ export function Header() {
               <Link href="/">
                 <div className="flex items-center cursor-pointer">
                   <PlusCircle className="h-8 w-8 text-primary" />
-                  <span className="ml-2 text-xl font-semibold text-gray-800">ParkSmart</span>
+                  <span className="ml-2 text-xl font-semibold text-gray-800">Quick Park</span>
                 </div>
               </Link>
             </div>
