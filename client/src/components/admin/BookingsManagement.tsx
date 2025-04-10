@@ -233,7 +233,7 @@ export function BookingsManagement() {
                 </div>
                 <div>
                   <div className="text-sm font-medium text-gray-500">Price</div>
-                  <div>${viewingBooking.totalPrice.toFixed(2)}</div>
+                  <div>₹{viewingBooking.totalPrice.toFixed(2)}</div>
                 </div>
               </div>
               
