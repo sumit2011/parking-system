@@ -2,6 +2,7 @@ import { useState, ReactNode } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLocation } from "wouter";
 import { PlusCircle, LayoutDashboard, Calendar, MapPin, Users, LogOut } from "lucide-react";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 type Tab = "dashboard" | "bookings" | "spots" | "users";
 
@@ -32,7 +33,7 @@ export function AdminLayout({ children, defaultTab = "dashboard" }: AdminLayoutP
   };
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-background">
       {/* Sidebar */}
       <div className="w-64 bg-gray-800 text-white">
         <div className="p-4">

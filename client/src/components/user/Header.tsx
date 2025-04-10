@@ -4,6 +4,7 @@ import { PlusCircle } from "lucide-react";
 import { AuthModal } from "@/components/auth/AuthModal";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 export function Header() {
   const { isAuthenticated, user, logout } = useAuth();
@@ -19,18 +20,20 @@ export function Header() {
 
   return (
     <>
-      <header className="bg-white shadow">
+      <header className="bg-background border-b shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <Link href="/">
                 <div className="flex items-center cursor-pointer">
                   <PlusCircle className="h-8 w-8 text-primary" />
-                  <span className="ml-2 text-xl font-semibold text-gray-800">Quick Park</span>
+                  <span className="ml-2 text-xl font-semibold text-foreground">Quick Park</span>
                 </div>
               </Link>
             </div>
             <div className="flex items-center">
+              <ThemeToggle />
+              
               {isAuthenticated && user?.isAdmin && (
                 <Link href="/admin">
                   <Button variant="ghost" className="mr-4">
@@ -41,7 +44,7 @@ export function Header() {
               
               {isAuthenticated ? (
                 <div className="flex items-center">
-                  <span className="mr-2 text-gray-600">{user?.name}</span>
+                  <span className="mr-2 text-muted-foreground">{user?.name}</span>
                   <Button variant="ghost" onClick={handleToggleAuth}>
                     Log Out
                   </Button>
