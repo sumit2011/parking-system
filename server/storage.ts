@@ -67,7 +67,7 @@ export class MemStorage implements IStorage {
   private bookingIdCounter: number;
 
   constructor() {
-    this.sessionStore = MemoryStore({
+    this.sessionStore = new MemoryStore({
       checkPeriod: 86400000 // 24 hours
     });
     this.users = new Map();
