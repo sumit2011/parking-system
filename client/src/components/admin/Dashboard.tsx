@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { User, Clock, Calendar, DollarSign } from "lucide-react";
+import { User, Clock, Calendar, IndianRupee } from "lucide-react";
 import { format, parseISO } from "date-fns";
 
 interface DashboardData {

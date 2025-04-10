@@ -40,7 +40,7 @@ export function BookingForm({ spot, date, startTime, endTime, price, onBook }: B
         </div>
         <div>
           <p className="text-sm text-gray-600">Price:</p>
-          <p className="font-semibold">${price.toFixed(2)}</p>
+          <p className="font-semibold">₹{price.toFixed(2)}</p>
         </div>
       </div>
       <button 

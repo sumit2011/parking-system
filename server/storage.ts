@@ -80,7 +80,7 @@ export class MemStorage implements IStorage {
     // Initialize with admin user
     this.createUser({
       name: "Admin User",
-      email: "admin@parksmart.com",
+      email: "admin@quickpark.com",
       password: "admin123",
       isAdmin: true,
       isActive: true,
@@ -99,36 +99,60 @@ export class MemStorage implements IStorage {
   }
 
   private async createInitialParkingSpots() {
-    // Level 1 spots
+    // Connaught Place - Central Delhi
     for (let i = 1; i <= 6; i++) {
       this.createParkingSpot({
-        spotNumber: `A${i}`,
+        spotNumber: `CP${i}`,
         level: 1,
-        type: "STANDARD",
+        type: i === 2 ? "HANDICAPPED" : "STANDARD",
         isAvailable: true,
-        pricePerHour: 3.0,
+        pricePerHour: i === 2 ? 180 : 200,
       });
     }
     
-    // Level 2 spots
+    // Cyber Hub - Gurgaon
     for (let i = 1; i <= 6; i++) {
       this.createParkingSpot({
-        spotNumber: `B${i}`,
-        level: 2,
-        type: i === 3 ? "HANDICAPPED" : "STANDARD",
+        spotNumber: `CH${i}`,
+        level: 1,
+        type: i === 4 ? "HANDICAPPED" : "STANDARD",
         isAvailable: true,
-        pricePerHour: i === 3 ? 2.5 : 3.0,
+        pricePerHour: i === 4 ? 120 : 150,
+      });
+    }
+    
+    // Saket Mall - South Delhi
+    for (let i = 1; i <= 6; i++) {
+      this.createParkingSpot({
+        spotNumber: `SM${i}`,
+        level: i <= 3 ? 1 : 2,
+        type: i === 6 ? "ELECTRIC" : "STANDARD",
+        isAvailable: true,
+        pricePerHour: i === 6 ? 250 : 180,
+      });
+    }
+    
+    // Noida Sector 18 Market
+    for (let i = 1; i <= 6; i++) {
+      this.createParkingSpot({
+        spotNumber: `NS${i}`,
+        level: i <= 3 ? 1 : 2,
+        type: i === 5 ? "COMPACT" : "STANDARD",
+        isAvailable: true,
+        pricePerHour: i === 5 ? 100 : 120,
       });
     }
     
     // Set some spots as unavailable for demo purposes
-    const spotA3 = await this.getParkingSpotByNumber("A3");
-    const spotB2 = await this.getParkingSpotByNumber("B2");
-    const spotB6 = await this.getParkingSpotByNumber("B6");
+    const spotCP3 = await this.getParkingSpotByNumber("CP3");
+    const spotCH2 = await this.getParkingSpotByNumber("CH2");
+    const spotSM6 = await this.getParkingSpotByNumber("SM6");
+    const spotNS4 = await this.getParkingSpotByNumber("NS4");
     
-    if (spotA3) await this.updateParkingSpot(spotA3.id, { isAvailable: false });
-    if (spotB2) await this.updateParkingSpot(spotB2.id, { isAvailable: false });
-    if (spotB6) await this.updateParkingSpot(spotB6.id, { isAvailable: false });
+    if (spotCP3) await this.updateParkingSpot(spotCP3.id, { isAvailable: false });
+    if (spotCH2) await this.updateParkingSpot(spotCH2.id, { isAvailable: false });
+    if (spotSM6) await this.updateParkingSpot(spotSM6.id, { isAvailable: false });
+    if (spotNS4) await this.updateParkingSpot(spotNS4.id, { isAvailable: false });
   }
 
   // User operations
