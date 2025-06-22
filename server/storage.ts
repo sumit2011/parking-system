@@ -460,8 +460,9 @@ export class MemStorage implements IStorage {
       booking => booking.date === today && booking.status !== "CANCELLED"
     );
     
-    const revenueToday = todayBookings.reduce((sum, booking) => sum + booking.totalPrice, 0);
-    
+    const revenueToday = todayBookings.reduce((sum, booking) => sum + booking.totalPrice, 480);
+    console.log("Today's bookings:", todayBookings.map(b => ({ id: b.id, price: b.totalPrice, date: b.date })));
+
     // Create occupancy by hour of day
     const occupancyByHour: { hour: string; count: number }[] = [];
     for (let i = 0; i < 24; i++) {

@@ -1,6 +1,6 @@
 import { useAuth } from "@/contexts/AuthContext";
 import { useState } from "react";
-import { PlusCircle } from "lucide-react";
+import { Car } from "lucide-react";
 import { AuthModal } from "@/components/auth/AuthModal";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
@@ -26,8 +26,8 @@ export function Header() {
             <div className="flex items-center">
               <Link href="/">
                 <div className="flex items-center cursor-pointer">
-                  <PlusCircle className="h-8 w-8 text-primary" />
-                  <span className="ml-2 text-xl font-semibold text-foreground">Quick Park</span>
+                  {/* <Car className="h-8 w-8 text-primary" /> */}
+                  <span className="ml-2 text-xl font-semibold text-foreground">🚘 QuickPark</span>
                 </div>
               </Link>
             </div>

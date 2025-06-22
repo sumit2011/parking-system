@@ -141,11 +141,11 @@ export function ParkingSpotsManagement() {
     const levelSpots = spots?.filter(spot => spot.level === level) || [];
     
     return (
-      <div className="grid grid-cols-8 gap-3 mb-6">
-        {levelSpots.map(spot => (
-          <div 
+      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-3 mb-6">
+        {levelSpots.map((spot) => (
+          <div
             key={spot.id}
-            className={`rounded-lg shadow p-2 text-center text-white ${
+            className={`rounded-lg shadow p-2 text-center text-white text-sm ${
               spot.isAvailable ? "bg-green-500" : "bg-red-500 opacity-75"
             }`}
           >
@@ -159,8 +159,8 @@ export function ParkingSpotsManagement() {
   return (
     <main className="p-6">
       <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-lg font-semibold">Parking Spots Management</h2>
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">          
+        <h1 className="text-lg font-semibold">Parking Spots Management</h1>
           <Button onClick={openAddModal}>
             Add New Spot
           </Button>
@@ -273,18 +273,19 @@ export function ParkingSpotsManagement() {
                   name="level"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Level</FormLabel>
+                      <FormLabel>Location</FormLabel>
                       <FormControl>
                         <Select 
                           value={field.value.toString()} 
                           onValueChange={(value) => field.onChange(parseInt(value))}
                         >
                           <SelectTrigger>
-                            <SelectValue placeholder="Select level" />
+                            <SelectValue placeholder="Select location" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="1">Level 1</SelectItem>
-                            <SelectItem value="2">Level 2</SelectItem>
+                            <SelectItem value="1">Srinagar</SelectItem>
+                            <SelectItem value="2">Pahalgam</SelectItem>
+                            <SelectItem value="3">Sonmarg</SelectItem>
                           </SelectContent>
                         </Select>
                       </FormControl>

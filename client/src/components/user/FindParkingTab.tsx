@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
-import { Booking, ParkingSpot } from "@shared/schema";
+import { ParkingSpot } from "@shared/schema";
 import { ParkingGrid } from "../parking/ParkingGrid";
 import { BookingForm } from "../parking/BookingForm";
 import { apiRequest } from "@/lib/queryClient";
@@ -11,6 +11,7 @@ import { format } from "date-fns";
 export function FindParkingTab() {
   const { isAuthenticated } = useAuth();
   const { toast } = useToast();
+
   const [date, setDate] = useState<string>(format(new Date(), "yyyy-MM-dd"));
   const [startTime, setStartTime] = useState<string>("10:00");
   const [duration, setDuration] = useState<string>("1");
@@ -21,7 +22,6 @@ export function FindParkingTab() {
     enabled: !!date && !!startTime && !!duration,
   });
 
-  // Update time to current time when component loads
   useEffect(() => {
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, "0");
@@ -38,7 +38,7 @@ export function FindParkingTab() {
       });
       return;
     }
-    
+
     refetch();
     setSelectedSpot(null);
   };
@@ -75,13 +75,12 @@ export function FindParkingTab() {
       };
 
       await apiRequest("POST", "/api/bookings", bookingData);
-      
+
       toast({
         title: "Booking Successful",
         description: `You've successfully booked spot ${selectedSpot.spotNumber} on ${date}`,
       });
 
-      // Reset selection and refresh available spots
       setSelectedSpot(null);
       refetch();
     } catch (error) {
@@ -104,120 +103,117 @@ export function FindParkingTab() {
 
   return (
     <div className="py-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="text-xl font-semibold mb-4">Find Available Parking</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-md p-6 mb-8">
+        <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Find Available Parking</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
           <div>
-            <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="parking-date">
+            <label htmlFor="parking-date" className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">
               Date
             </label>
             <input
-              className="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               id="parking-date"
               type="date"
+              className="w-full rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500"
               value={date}
               onChange={(e) => setDate(e.target.value)}
               min={format(new Date(), "yyyy-MM-dd")}
             />
           </div>
+
           <div>
-            <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="parking-time">
+            <label htmlFor="parking-time" className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">
               Start Time
             </label>
             <input
-              className="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               id="parking-time"
               type="time"
+              className="w-full rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500"
               value={startTime}
               onChange={(e) => setStartTime(e.target.value)}
             />
           </div>
+
           <div>
-            <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="parking-duration">
+            <label htmlFor="parking-duration" className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 block">
               Duration (hours)
             </label>
             <select
-              className="appearance-none border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
               id="parking-duration"
+              className="w-full rounded-xl border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:ring-blue-500"
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
             >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="24">24</option>
+              {[1, 2, 3, 4, 5, 6, 24].map((val) => (
+                <option key={val} value={val}>{val}</option>
+              ))}
             </select>
           </div>
         </div>
-        
+
         <button
-          className="w-full bg-primary text-white font-medium py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl font-semibold text-sm transition duration-150"
           onClick={handleSearch}
         >
           Search Available Spots
         </button>
       </div>
 
-      <div className="bg-white rounded-lg shadow p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">Parking Map</h2>
-          <div className="flex space-x-4">
-            <div className="flex items-center">
-              <div className="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
-              <span className="text-sm text-gray-600">Available</span>
+      <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-md p-6">
+        <div className="flex flex-wrap justify-between items-center mb-4 gap-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Parking Map</h2>
+          <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
+            <div className="flex items-center gap-2">
+              <span className="w-4 h-4 bg-green-500 rounded-full"></span> Available
             </div>
-            <div className="flex items-center">
-              <div className="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
-              <span className="text-sm text-gray-600">Occupied</span>
+            <div className="flex items-center gap-2">
+              <span className="w-4 h-4 bg-red-500 rounded-full"></span> Occupied
             </div>
-            <div className="flex items-center">
-              <div className="w-4 h-4 bg-yellow-500 rounded-full mr-2"></div>
-              <span className="text-sm text-gray-600">Selected</span>
+            <div className="flex items-center gap-2">
+              <span className="w-4 h-4 bg-yellow-500 rounded-full"></span> Selected
             </div>
           </div>
         </div>
 
-        <div className="overflow-auto" style={{ maxHeight: "500px" }}>
+        <div >
           {isLoading ? (
-            <div className="text-center py-8">Loading parking spots...</div>
+            <div className="text-center py-8 text-gray-500 dark:text-gray-400">Loading parking spots...</div>
           ) : spots && spots.length > 0 ? (
-            <div className="border border-gray-200 rounded-lg p-4 mb-4">
-              <h3 className="text-lg font-medium mb-4">Main Parking Area - Level 1</h3>
-              <ParkingGrid 
-                spots={spots.filter(spot => spot.level === 1)} 
-                selectedSpot={selectedSpot} 
-                onSelectSpot={handleSelectSpot} 
-              />
-
-              <h3 className="text-lg font-medium mb-4 mt-6">Main Parking Area - Level 2</h3>
-              <ParkingGrid 
-                spots={spots.filter(spot => spot.level === 2)} 
-                selectedSpot={selectedSpot} 
-                onSelectSpot={handleSelectSpot} 
-              />
+            <div className="space-y-6">
+              {[
+                { level: 1, title: "Main Parking Area - Srinagar" },
+                { level: 2, title: "Main Parking Area - Pahalgam" },
+                { level: 3, title: "Main Parking Area - Sonmarg" },
+              ].map(({ level, title }) => (
+                <div key={level}>
+                  <h3 className="text-md font-medium mb-3 text-gray-900 dark:text-gray-100">{title}</h3>
+                  <ParkingGrid
+                    spots={spots.filter((spot) => spot.level === level)}
+                    selectedSpot={selectedSpot}
+                    onSelectSpot={handleSelectSpot}
+                  />
+                </div>
+              ))}
             </div>
           ) : (
-            <div className="text-center py-8">
-              {spots?.length === 0 
-                ? "No parking spots available for the selected time and date." 
+            <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+              {spots?.length === 0
+                ? "No parking spots available for the selected time and date."
                 : "Please select a date and time to view available parking spots."}
             </div>
           )}
         </div>
 
         {selectedSpot && (
-          <BookingForm
-            spot={selectedSpot}
-            date={date}
-            startTime={startTime}
-            endTime={endTime}
-            price={selectedSpot.pricePerHour * parseInt(duration)}
-            onBook={handleBook}
-          />
+          <div className="mt-8">
+            <BookingForm
+              spot={selectedSpot}
+              date={date}
+              startTime={startTime}
+              endTime={endTime}
+              price={selectedSpot.pricePerHour * parseInt(duration)}
+              onBook={handleBook}
+            />
+          </div>
         )}
       </div>
     </div>

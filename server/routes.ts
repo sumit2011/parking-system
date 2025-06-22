@@ -138,7 +138,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         totalPrice,
         status: "CONFIRMED",
       });
-
+      // Update spot availability
+      await storage.updateParkingSpot(spotId, { isAvailable: false });
       res.status(201).json(booking);
     } catch (error) {
       console.error("Error creating booking:", error);
@@ -172,6 +173,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Cancel the booking
       const success = await storage.deleteBooking(bookingId);
       if (success) {
+        // Make the spot available again
+        await storage.updateParkingSpot(booking.spotId, { isAvailable: true });
         res.json({ message: "Booking cancelled successfully" });
       } else {
         res.status(500).json({ message: "Failed to cancel booking" });
@@ -223,6 +226,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Cancel the booking
       const success = await storage.deleteBooking(bookingId);
       if (success) {
+        await storage.updateParkingSpot(booking.spotId, { isAvailable: true });
         res.json({ message: "Booking cancelled successfully" });
       } else {
         res.status(500).json({ message: "Failed to cancel booking" });

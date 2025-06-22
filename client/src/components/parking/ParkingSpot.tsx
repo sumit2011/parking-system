@@ -25,8 +25,10 @@ export function ParkingSpot({ spot, isSelected, onSelect }: ParkingSpotProps) {
         spot.isAvailable ? "cursor-pointer hover:bg-green-600" : ""
       } transition-all duration-200`}
       onClick={handleClick}
+      onTouchStart={handleClick}
+      onTouchEnd={handleClick}
     >
-      <div className="font-bold">{spot.spotNumber}</div>
+      <div className="font-bold">{spot.spotNumber} ₹{spot.pricePerHour}/Hr</div>
       <div className="text-xs">
         {isSelected 
           ? "Selected" 

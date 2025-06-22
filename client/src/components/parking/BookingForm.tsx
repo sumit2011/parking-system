@@ -23,24 +23,24 @@ export function BookingForm({ spot, date, startTime, endTime, price, onBook }: B
   })();
 
   return (
-    <div className="mt-6 p-4 border border-gray-200 rounded-lg bg-gray-50">
-      <h3 className="text-lg font-medium mb-4">Booking Details</h3>
+    <div className="mt-6 p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800">
+      <h3 className="text-lg font-medium mb-4 text-gray-900 dark:text-gray-100">Booking Details</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
-          <p className="text-sm text-gray-600">Spot Selected:</p>
-          <p className="font-semibold">{spot.spotNumber}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300">Spot Selected:</p>
+          <p className="font-semibold text-gray-900 dark:text-gray-100">{spot.spotNumber}</p>
         </div>
         <div>
-          <p className="text-sm text-gray-600">Date:</p>
-          <p className="font-semibold">{formattedDate}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300">Date:</p>
+          <p className="font-semibold text-gray-900 dark:text-gray-100">{formattedDate}</p>
         </div>
         <div>
-          <p className="text-sm text-gray-600">Time:</p>
-          <p className="font-semibold">{startTime} - {endTime}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300">Time:</p>
+          <p className="font-semibold text-gray-900 dark:text-gray-100">{startTime} - {endTime}</p>
         </div>
         <div>
-          <p className="text-sm text-gray-600">Price:</p>
-          <p className="font-semibold">₹{price.toFixed(2)}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300">Price:</p>
+          <p className="font-semibold text-gray-900 dark:text-gray-100">₹{price.toFixed(2)}</p>
         </div>
       </div>
       <button 
